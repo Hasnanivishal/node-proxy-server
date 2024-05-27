@@ -29,6 +29,10 @@ const server = http.createServer((req, res) => {
     proxy.web(req, res, { target: 'https://api.github.com/search/users?q=hasnanivishal&per_page=10&page=1' });
   }
 
+  if(req.url == "/favicon.ico") {
+    return;
+  }
+
   const targetUrl = req.url;
   console.log("Forward to targetUrl", targetUrl);
   proxy.web(req, res, { target: targetUrl });
