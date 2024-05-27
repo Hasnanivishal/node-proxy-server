@@ -8,18 +8,16 @@ proxy.on('error', (err, req, res) => {
   res.writeHead(500, {
     'Content-Type': 'text/plain'
   });
-  res.end('<<< Failed to Create httpProxy Server >>>');
+  res.end('<<< Failed to Create httpProxy Server >>>', err);
 });
 
 proxy.on('proxyReq', function(proxyReq, req, res, options) {
-  console.log("proxyReq", proxyReq);
+  console.log("Proxy Server is called");
 });
 
 const server = http.createServer((req, res) => {
   console.log("Forward the request to ", req.url);
-
   const targetUrl = req.url;
-  
   proxy.web(req, res, { target: targetUrl });
 });
 
