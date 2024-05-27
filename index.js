@@ -1,7 +1,7 @@
 const http = require('http');
 const httpProxy = require('http-proxy');
 const proxy = httpProxy.createProxyServer({
-  target: 'https://github.com', 
+  target: 'https://api.github.com', 
   secure: false
 });
 
@@ -23,19 +23,20 @@ proxy.on('proxyReq', function(proxyReq, req, res, options) {
 
 const server = http.createServer((req, res) => {
   console.log("Request URL is", req.url);
+  proxy.web(req, res, { target: 'https://api.github.com/search/users?q=hasnanivishal&per_page=10&page=1' });
   
-  if(req.url == "/") {
-    console.log("Forward the request to Default Github API in case of empty");
-    proxy.web(req, res, { target: 'https://api.github.com/search/users?q=hasnanivishal&per_page=10&page=1' });
-  }
+  // if(req.url == "/") {
+  //   console.log("Forward the request to Default Github API in case of empty");
+  //   proxy.web(req, res, { target: 'https://api.github.com/search/users?q=hasnanivishal&per_page=10&page=1' });
+  // }
 
-  if(req.url == "/favicon.ico") {
-    return;
-  }
+  // if(req.url == "/favicon.ico") {
+  //   return;
+  // }
 
-  const targetUrl = req.url;
-  console.log("Forward to targetUrl", targetUrl);
-  proxy.web(req, res, { target: targetUrl });
+  // const targetUrl = req.url;
+  // console.log("Forward to targetUrl", targetUrl);
+  // proxy.web(req, res, { target: targetUrl });
 });
 
 server.listen(PORT, () => {
