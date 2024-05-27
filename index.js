@@ -1,6 +1,9 @@
 const http = require('http');
 const httpProxy = require('http-proxy');
-const proxy = httpProxy.createProxyServer({});
+const proxy = httpProxy.createProxyServer({
+  target: 'https://github.com', 
+  secure: false
+});
 
 const PORT = process.env.PORT || 3000;
 
