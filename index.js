@@ -1,7 +1,7 @@
 const http = require('http');
 const httpProxy = require('http-proxy');
 const proxy = httpProxy.createProxyServer({
-  target: 'https://api.github.com', 
+  target: 'https://jsonplaceholder.typicode.com', 
   secure: false
 });
 
@@ -23,7 +23,7 @@ proxy.on('proxyReq', function(proxyReq, req, res, options) {
 
 const server = http.createServer((req, res) => {
   console.log("Request URL is", req.url);
-  proxy.web(req, res, { target: 'https://api.github.com/search/users?q=hasnanivishal&per_page=10&page=1' });
+  proxy.web(req, res, { target: 'https://jsonplaceholder.typicode.com/posts/1' });
   
   // if(req.url == "/") {
   //   console.log("Forward the request to Default Github API in case of empty");
