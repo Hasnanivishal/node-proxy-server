@@ -23,7 +23,7 @@ const server = http.createServer((req, res) => {
   
   if(req.url == "/") {
     console.log("Forward the request Google in case of empty");
-    proxy.web(req, res, { target: '' });
+    proxy.web(req, res, { target: 'https://www.google.com' });
   }
 
   const targetUrl = req.url;
