@@ -11,6 +11,10 @@ proxy.on('error', (err, req, res) => {
   res.end('<<< Failed to Create httpProxy Server >>>');
 });
 
+proxy.on('proxyReq', function(proxyReq, req, res, options) {
+  console.log("proxyReq", proxyReq);
+});
+
 const server = http.createServer((req, res) => {
   console.log("Forward the request to ", req.url);
 
