@@ -22,8 +22,8 @@ const server = http.createServer((req, res) => {
   console.log("Request URL is", req.url);
   
   if(req.url == "/") {
-    console.log("Forward the request Google in case of empty");
-    proxy.web(req, res, { target: 'https://www.google.com' });
+    console.log("Forward the request to Default Github API in case of empty");
+    proxy.web(req, res, { target: 'https://api.github.com/search/users?q=hasnanivishal&per_page=10&page=1' });
   }
 
   const targetUrl = req.url;
